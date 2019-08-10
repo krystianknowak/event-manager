@@ -1,54 +1,21 @@
 {
-  "users": [
+  "events": [
     {
       "id": 1,
-      "first_name": "Robert",
-      "last_name": "Schwartz",
-      "email": "rob23@gmail.com"
-    },
-    {
-      "id": 2,
-      "first_name": "Lucy",
-      "last_name": "Ballmer",
-      "email": "lucyb56@gmail.com"
-    },
-    {
-      "id": 3,
-      "first_name": "Anna",
-      "last_name": "Smith",
-      "email": "annasmith23@gmail.com"
-    },
-    {
-      "id": 4,
-      "first_name": "Robert",
-      "last_name": "Brown",
-      "email": "bobbrown432@yahoo.com"
-    },
-    {
-      "id": 5,
-      "first_name": "Roger",
-      "last_name": "Bacon",
-      "email": "rogerbacon12@yahoo.com"
-    },
-    {
-      "id": 6
-    }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": 2
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "title": "meet up",
+      "date": "2019-09-01",
+      "time": "18:00",
+      "description": "first meet up",
+      "image": "imageurl",
+      "type": "sport",
+      "phoneNumer": "111111111",
+      "email": "event@event.com",
+      "eventPlace": {
+        "city": "Katowice",
+        "postalCode": "40-032",
+        "street": "Plac Sejmu Śląskiego",
+        "buildingNumber": 4
+      }
     }
   ],
   "profile": {

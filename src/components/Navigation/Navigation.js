@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 export default class Navigation extends Component {
 
-    showMenu = (e) => {
-        const burgerTarget = e.target.dataset.target;
-        const navbarElements = document.getElementById(burgerTarget);
-        e.target.classList.toggle('is-active');
+    toggleMenu = () => {
+        const burgerTarget = document.querySelector(".burger");
+        const navbarElements = document.getElementById("navbarElements");
+        burgerTarget.classList.toggle('is-active'); 
         navbarElements.classList.toggle('is-active');
     }
 
@@ -19,7 +20,7 @@ export default class Navigation extends Component {
                         <a className="navbar-item is-primary brand-logo" href="#">
                             <h1>Event Manager</h1>
                         </a>
-                        <a role="button" onClick={this.showMenu} className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarElements">
+                        <a role="button" onClick={this.toggleMenu} className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarElements">
                             <span aria-hidden="true" />
                             <span aria-hidden="true" />
                             <span aria-hidden="true" />
@@ -27,12 +28,12 @@ export default class Navigation extends Component {
                     </div>
                     <div id="navbarElements" className="navbar-menu">
                         <div className="navbar-end">
-                            <a className="navbar-item">
-                                Home
-                            </a>
-                            <a className="navbar-item">
-                                Documentation
-                            </a>
+                            <NavLink className="navbar-item" to={"/"} onClick={this.toggleMenu}>
+                                Events
+                            </NavLink>
+                            <NavLink className="navbar-item" to={"eventbuilder"} onClick={this.toggleMenu}>
+                                Add Event
+                            </NavLink>
                         </div>
 
                     </div>
