@@ -1,0 +1,20 @@
+.events-section {
+    margin-top: 20px;
+}
+
+.card {
+    height: 100%;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .events-section {
+        padding: 0 20px;
+    }
+}

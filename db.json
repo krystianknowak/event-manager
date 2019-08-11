@@ -16,6 +16,23 @@
         "street": "Plac Sejmu Śląskiego",
         "buildingNumber": 4
       }
+    },
+    {
+      "id": 2,
+      "title": "spotkanie",
+      "date": "2019-10-05",
+      "time": "19:00",
+      "description": "pierwsze spotkanie",
+      "image": "imageurl",
+      "type": "health",
+      "phoneNumer": "111111111",
+      "email": "spotkanie@spotkanie.com",
+      "eventPlace": {
+        "city": "Gliwice",
+        "postalCode": "40-100",
+        "street": "Bojkowska",
+        "buildingNumber": 4
+      }
     }
   ],
   "profile": {
