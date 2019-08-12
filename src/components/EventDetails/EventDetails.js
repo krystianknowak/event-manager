@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import axios from '../../axios-events';
+import * as bulmaToast from "bulma-toast";
 import './EventDetails.css';
 
 export default class EventDetails extends Component {
@@ -20,6 +21,19 @@ export default class EventDetails extends Component {
     });
   }
 
+  showNotifcation = () => {
+    bulmaToast.toast({
+      message: "Congratulations! You have successfully registered for the event",
+      type: "is-success",
+      position: "bottom-right",
+      dismissible: true,
+      duration: 6000,
+      closeOnClick: true,
+      pauseOnHover: true,
+      animate: { in: 'fadeIn', out: 'fadeOut' }
+    });
+  }
+
   render() {
     return (
       <div className="block">
@@ -32,11 +46,12 @@ export default class EventDetails extends Component {
             </div>
             <div className="column ">
               <h1 className="title is-uppercase is-4">{this.state.event.title}</h1>
+              <p className="subtitle is-6">Event type: {this.state.event.type}</p>
+
               <br />
               <h1 className="subtitle is-5">by {this.state.event.email}</h1>
-              <button href="" className="button is-primary is-large is-outlined is-fullwidth">Register</button>
+              <button onClick={this.showNotifcation} className="button is-primary is-large is-outlined is-fullwidth">Register</button>
               <div>
-                <span>{this.state.event.type}</span>
               </div>
             </div>
           </div>
