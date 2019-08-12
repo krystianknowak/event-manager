@@ -28,10 +28,10 @@ export default class Navigation extends Component {
                         </div>
                         <div id="navbarElements" className="navbar-menu">
                             <div className="navbar-end">
-                            <NavLink className="navbar-item" to={"/"} onClick={this.toggleMenu}>
+                            <NavLink className="navbar-item" to="/" onClick={this.toggleMenu}>
                                     Events
                             </NavLink>
-                                <NavLink className="navbar-item" to={"eventbuilder"} onClick={this.toggleMenu}>
+                                <NavLink className="navbar-item" to="/eventbuilder" onClick={this.toggleMenu}>
                                     Add Event
                             </NavLink>
                             </div>

@@ -7,10 +7,10 @@ import { NavLink } from 'react-router-dom';
 const Event = (props) => {
     return (
         <NavLink to={`eventdetails/${props.event.id}`}>
-        <div className="card" onClick={props.showDetails}>
+        <div className="card card-animated" onClick={props.showDetails}>
             <div className="card-image">
                 <figure className="image is-2by1">
-                    <img src="https://cdn.pixabay.com/photo/2015/07/10/17/53/cheers-839865_960_720.jpg" alt="Placeholder image" />
+                    <img src={props.event.image} alt="event image" />
                 </figure>
             </div>
             <div className="card-content">

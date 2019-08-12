@@ -13,7 +13,7 @@ class App extends Component {
       <>
         <BrowserRouter>
           <Navigation />
-          <div className="container">
+          <div className="container page-content">
             <Switch>
               <Route path="/eventbuilder" component={EventBuilder} />
               <Route path="/eventdetails/:id" component={EventDetails} />
@@ -21,6 +21,14 @@ class App extends Component {
               <Redirect from="/" to="/events" />
             </Switch>
           </div>
+          <footer className="footer">
+            <div className="content has-text-centered">
+              <p>
+                Simple event manager app writing with <a target="blank" href="https://Bulma.io">Bulma</a>.
+              </p>
+            </div>
+          </footer>
+
         </BrowserRouter>
       </>
     );

@@ -1,14 +1,10 @@
-.events-section {
-    margin-top: 20px;
-}
-
-.card {
+.card-animated {
     height: 100%;
     transition: .3s;
     cursor: pointer;
 }
 
-.card:hover {
+.card-animated:hover {
     transform: scale(1.01);
 }
 

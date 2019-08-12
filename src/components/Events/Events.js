@@ -17,10 +17,6 @@ export default class Events extends Component {
     });
   }
 
-  showDetails = () => {
-
-  }
-
   render() {
     return (
       <section className="events-section">
@@ -40,8 +36,7 @@ export default class Events extends Component {
               <div className="column is-one-third" 
               key={event.id} >
                 <Event 
-                  event={event}
-                  showDetails={this.showDetails}/>
+                  event={event}/>
               </div>
             ))
           }        
