@@ -33,6 +33,23 @@
         "street": "Bojkowska",
         "buildingNumber": 4
       }
+    },
+    {
+      "id": 3,
+      "title": "spotkanie",
+      "date": "2019-10-05",
+      "time": "19:00",
+      "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.",
+      "image": "https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495_960_720.jpg",
+      "type": "health",
+      "phoneNumber": "111111111",
+      "email": "spotkanie@spotkanie.com",
+      "eventPlace": {
+        "city": "Gliwice",
+        "postalCode": "40-100",
+        "street": "Bojkowska",
+        "buildingNumber": 4
+      }
     }
   ],
   "profile": {

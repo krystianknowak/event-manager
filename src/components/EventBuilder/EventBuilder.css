@@ -1,0 +1,29 @@
+.image-background {
+    height: 95vh;
+    background-image: linear-gradient(
+        to right bottom,
+        hsla(171, 100%, 41%, .8),
+        rgba(66, 209, 188, 0.8)),
+        url("https://cdn.pixabay.com/photo/2017/04/11/21/29/snack-2222891_960_720.jpg");
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    border-radius: 8px;
+}
+
+.image-background h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%);
+}
+
+.medium-spacing {
+    padding: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+    .column-image {
+        display: none !important;
+    }
+}

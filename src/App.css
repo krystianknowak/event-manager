@@ -1,5 +1,7 @@
 @import "../node_modules/bulma/css/bulma.min.css";
+@import "../node_modules/bulma-extensions/bulma-calendar/dist/css/bulma-calendar.min.css";
 @import "../node_modules/animate.css/animate.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 .page-content {
     margin-top: 20px;
@@ -9,6 +11,6 @@ hr {
     border-top: 1px solid rgb(219, 219, 219);;
 }
 
-/* .notification {
-    transition: .3s;
-} */
+i.fa {
+    font-family: fontawesome !important;
+}

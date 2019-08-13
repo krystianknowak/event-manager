@@ -11,7 +11,7 @@ export default class Events extends Component {
 
   componentDidMount() {
     axios.get().then(response => {
-      this.setState({events: response.data});
+      this.setState({events: response.data, loading: false});
     }).catch(error => {
       console.warn(error);
     });
@@ -24,22 +24,11 @@ export default class Events extends Component {
           <div className="columns is-multiline">
           {
             this.state.events.map(event => (
-              <div className="column is-one-third" 
-              key={event.id} >
-                <Event 
-                  event={event}/>
+              <div className="column is-one-third" key={event.id} >
+                <Event event={event}/>
               </div>
             ))
-          }  
-          {
-            this.state.events.map(event => (
-              <div className="column is-one-third" 
-              key={event.id} >
-                <Event 
-                  event={event}/>
-              </div>
-            ))
-          }        
+          }       
           </div>
         </div>
       </section>
