@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from 'react'
-import bulmaCalendar from 'bulma-extensions/bulma-calendar/dist/js/bulma-calendar';
+import React, { Component } from 'react';
 import axios from '../../axios-events';
+import flatpickr from "flatpickr";
 import * as bulmaToast from "bulma-toast";
 import './EventBuilder.css';
 
@@ -25,6 +25,22 @@ export default class EventBuilder extends Component {
         buildingNumber: ""
       }
     },
+    eventValid: {
+      title: false,
+      date: false,
+      time: false,
+      description: false,
+      image: false,
+      type: false,
+      phoneNumber: false,
+      email: false,
+      eventPlace: {
+        city: false,
+        postalCode: false,
+        street: false,
+        buildingNumber: false
+      }
+    },
     toastConfig: {
       position: "bottom-right",
       dismissible: true,
@@ -37,23 +53,34 @@ export default class EventBuilder extends Component {
   };
 
   componentDidMount() {
-    bulmaCalendar.attach('[type="date"]', {
-      color: "primary",
-      dateFormat: "YYYY-MM-DD",
-      showFooter: false,
-      showHeader: false
+    flatpickr('#datePicker', {
+      onChange: () => {
+        this.validate(document.getElementById('datePicker'));
+      }
     });
   }
 
   handleSubmit = e => {
     e.preventDefault();
     const elements = document.getElementById('eventBuilderForm').elements;
-
-    for (let i=0; i<elements.length; i++) {
+    console.log(this.state.eventValid);
+    for (let i = 0; i < elements.length; i++) {
       if (elements[i].getAttribute("name") !== null) {
         this.validate(elements[i]);
       }
     }
+
+    const {eventPlace, ...validValues } = { ...this.state.eventValid, ...this.state.eventValid.eventPlace};
+    let createNewEvent = true;
+    Object.values(validValues).forEach(val => {
+      if(!val) {
+        createNewEvent = val;   
+        return;
+      }
+    })
+    if(createNewEvent) {
+      this.createEvent(); 
+    } 
   }
 
   handleChange = e => {
@@ -63,13 +90,13 @@ export default class EventBuilder extends Component {
 
   handleImage = e => {
     e.persist();
-    this.setState({ selectedFile: e.target.files[0].name}, () => {
+    this.setState({ selectedFile: e.target.files[0].name }, () => {
       this.handleChange(e);
     });
   }
 
   createEvent = () => {
-    axios.post('', this.state).then(response => {
+    axios.post('', this.state.event).then(response => {
       bulmaToast.toast({ message: "Congratulations! You have successfully created an event", type: "is-success", ...this.state.toastConfig });
     }).catch(error => {
       console.warn(error);
@@ -86,109 +113,167 @@ export default class EventBuilder extends Component {
     const regexPostCode = /[0-9]{2}-[0-9]{3}/;
     const regexTime = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/;
 
+    const updatedEvent = {
+      event: {...this.state.event},
+      eventValid: {...this.state.eventValid}
+    };
+    updatedEvent.event[name] = element.value;
+
     switch (name) {
       case "title":
         if (element.value.length < 5 || element.value.length > 30) {
           helperMsg.innerText = "Please input the value between 5 and 30 characters";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "date":
         if (!element.value) {
           helperMsg.innerText = "Wrong date";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "time":
         if (!regexTime.test(element.value)) {
           helperMsg.innerText = "Wrong time";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "description":
         if (element.value.length < 20 || element.value.length > 100) {
           helperMsg.innerText = "Please input the value between 20 and 200 characters";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "image":
         if (this.state.selectedFile === "") {
           helperMsg.innerText = "You have to upload some picture";
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
+          updatedEvent.eventValid[name] = true;
+          this.setState({eventValid: updatedEvent.eventValid});
         }
         break;
       case "type":
         if (element.value === "") {
           helperMsg.innerText = "Please select a value";
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "phoneNumber":
         if (!regexPhoneNumber.test(element.value)) {
           helperMsg.innerText = "Wrong phone number";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "email":
         if (!regexEmail.test(element.value)) {
           helperMsg.innerText = "Wrong email adress";
           element.classList.add('is-danger');
+          updatedEvent.eventValid[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid[name] = true;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "city":
         if (element.value.length < 3 || element.value.length > 30) {
           helperMsg.innerText = "Please input the value between 3 and 30 characters";
           element.classList.add('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = true;
+          updatedEvent.event.eventPlace[name] = element.value;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "street":
         if (element.value.length < 3 || element.value.length > 30) {
           helperMsg.innerText = "Please input the value between 3 and 30 characters";
           element.classList.add('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = true;
+          updatedEvent.event.eventPlace[name] = element.value;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "postalCode":
         if (!regexPostCode.test(element.value)) {
           helperMsg.innerText = "Wrong postal code adress";
           element.classList.add('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = true;
+          updatedEvent.event.eventPlace[name] = element.value;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       case "buildingNumber":
         if (element.value > 9999 || element.value.length === 0) {
           helperMsg.innerText = "Value should not be greater than 9999";
           element.classList.add('is-danger');
+          updatedEvent.eventValid.eventPlace[name]= false;
+          this.setState({eventValid: updatedEvent.eventValid});
         } else {
           helperMsg.innerText = "";
           element.classList.remove('is-danger');
+          updatedEvent.eventValid.eventPlace[name] = true;
+          updatedEvent.event.eventPlace[name] = element.value;
+          this.setState({event: updatedEvent.event, eventValid: updatedEvent.eventValid});
         }
         break;
       default:
@@ -212,8 +297,11 @@ export default class EventBuilder extends Component {
                 </div>
                 <div className="field">
                   <label className="label">Date</label>
-                  <div className="control has-icons-left has-icons-right">
-                    <input onChange={this.handleChange} className="input" type="date" name="date" data-target="dateHelper"/>
+                  <div className="control has-icons-left">
+                    <input onChange={this.handleChange} className="input" id="datePicker" type="date" name="date" data-target="dateHelper" />
+                    <span className="icon is-small is-left">
+                    <i className="fa fa-calendar" />
+                  </span>
                   </div>
                   <p id="dateHelper" className="help is-danger"></p>
                 </div>

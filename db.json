@@ -50,6 +50,48 @@
         "street": "Bojkowska",
         "buildingNumber": 4
       }
+    },
+    {
+      "title": "js meetup",
+      "date": "2019-08-23",
+      "time": "18:00",
+      "description": "first js meetup first js meetup",
+      "image": "https://source.unsplash.com/random",
+      "type": "Culture",
+      "phoneNumber": "777777777",
+      "email": "hf@gf.com",
+      "eventPlace": {
+        "city": "Warszawa",
+        "postalCode": "44-310",
+        "street": "Powstańców",
+        "buildingNumber": "5"
+      },
+      "city": "Warszawa",
+      "street": "Powstańców",
+      "postalCode": "44-310",
+      "buildingNumber": "5",
+      "id": 4
+    },
+    {
+      "title": ".net meetup",
+      "date": "2019-08-23",
+      "time": "19:00",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem dummy.",
+      "image": "https://source.unsplash.com/random",
+      "type": "Culture",
+      "phoneNumber": "777777777",
+      "email": "hf@gf.com",
+      "eventPlace": {
+        "city": "Poznań",
+        "postalCode": "44-310",
+        "street": "Powstańców",
+        "buildingNumber": "15"
+      },
+      "city": "Poznań",
+      "street": "Powstańców",
+      "postalCode": "44-310",
+      "buildingNumber": "15",
+      "id": 5
     }
   ],
   "profile": {
